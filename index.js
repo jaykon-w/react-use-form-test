@@ -9,8 +9,8 @@ import { isEmail } from "validator";
 const phoneInputMask = value => [ value.replace(/\D/g, ''), stringMask("(00) 0000-00000", /\D/g)(value)];
 
 const required = val => (val ? undefined : "Campo obrigatório");
-const validadeEmail = val => (isEmail(val) ? undefined : "E-mail inválido");
-const validadePhone = val => /\d{10,11}/.test(val) ? undefined : "Telefone inválido";
+const validateEmail = val => (isEmail(val) ? undefined : "E-mail inválido");
+const validatePhone = val => /\d{10,11}/.test(val) ? undefined : "Telefone inválido";
 
 const CompleteField = ({ value, errors, setValue, validate, t }) => {
   return (
@@ -34,8 +34,8 @@ const ContactForm = props => {
     { validate, clear, isInvalid, toJSON, setValues }
   ] = useForm({
     name: useField("", [required]),
-    email: useField("", [required, validadeEmail]),
-    phone: useField("", [required, validadePhone], phoneInputMask),
+    email: useField("", [required, validateEmail]),
+    phone: useField("", [required, validatePhone], phoneInputMask),
   });
 
   return (
